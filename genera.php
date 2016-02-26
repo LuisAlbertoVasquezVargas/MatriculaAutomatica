@@ -19,45 +19,46 @@ $contador = 0;
 function back( $pos ){
 	global $P , $days , $esc , $S , $T , $courseName , $rand, $colorCurso, $contador;
 	if( $pos == count( $P ) ){
-		echo "<div class='row-fluid'><div class='box span11'>";
-		echo "<div class='box-content'>";
-		echo "<table class='table table-striped table-bordered bootstrap-datatable '>
+		$str = "";
+		str.= "<div class='row-fluid'><div class='box span11'>";
+		str.= "<div class='box-content'>";
+		str.= "<table class='table table-striped table-bordered bootstrap-datatable '>
 			<thead>";
-		echo "<tr>";
-		echo "<th class='cabecera'>HORARIO</th>";
-		// $str = "";
+		str.= "<tr>";
+		str.= "<th class='cabecera'>HORARIO</th>";
+		
 		$gg = 0;
 		for( $i = 0 ; $i < 6 ; $i++ )
 			switch ($days[ $i ]) {
 				case 'LU':
-					echo "<th class='cabecera'>LUNES</th>";
+					str "<th class='cabecera'>LUNES</th>";
 					break;
 				case 'MA':
-					echo "<th class='cabecera'>MARTES</th>";
+					str "<th class='cabecera'>MARTES</th>";
 					break;
 				case 'MI':
-					echo "<th class='cabecera'>MIERCOLES</th>";
+					str "<th class='cabecera'>MIERCOLES</th>";
 					break;
 				case 'JU':
-					echo "<th class='cabecera'>JUEVES</th>";
+					str "<th class='cabecera'>JUEVES</th>";
 					break;
 				case 'VI':
-					echo "<th class='cabecera'>VIERNES</th>";
+					str "<th class='cabecera'>VIERNES</th>";
 					break;
 				case 'SA':
-					echo "<th class='cabecera'>SABADO</th>";
+					str "<th class='cabecera'>SABADO</th>";
 					break;
 			}
-			echo "</tr>";
-			echo "</thead>";
-			echo "</tbody>";
+			str.= "</tr>";
+			str.= "</thead>";
+			str.= "</tbody>";
 		// 	$str.= $days[ $i ]." ";
 		// $str.= " esc " .(++$esc)."<br>";
 
 
 		for( $i = 8 ; $i <= 22 ; $i++ ){
-			echo "<tr>";
-			echo "<td class='hora'>".$i.":00</td>";
+			str.= "<tr>";
+			str.= "<td class='hora'>".$i.":00</td>";
 			for( $j = 0 ; $j < 6 ; $j++ ){
 				$len = count( $S[ $j ][ $i ] );
 				$cad = "";
@@ -66,29 +67,22 @@ function back( $pos ){
 					$cad = "<td class='cuerpo'></td>";
 				}else if( $len == 1 ){
 					$valor = $S[$j][$i][0];
-					// $keys = array_search($valor,array_column($colorCurso, 'curso'));
-					// echo $keys;
-						if($contador == 1){
-							$contador = 0;
-						}elseif ($contador == 0) {
-							$color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
-							$contador++;
-						}
 
 					$cad = "<td class='cuerpo cuerpoDia' style='background-color:".$color."'>".$S[ $j ][ $i ][ 0 ]."</td>";
 				}else{
 					$gg = 1;
-					echo "<td class='cuerpo'></td>";
+					str.= "<td class='cuerpo'></td>";
 					// $cad = "cruce x ".$len;
 				}
-				 echo $cad;
+				 str.= $cad;
 			}
-			echo "</tr>";
+			str.= "</tr>";
 		}
-		echo "</tbody></table>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
+		str.= "</tbody></table>";
+		str.= "</div>";
+		str.= "</div>";
+		str.= "</div>";
+		if( !$gg ) echo str;
 		return;
 	}
 	//back( $pos + 1 );
